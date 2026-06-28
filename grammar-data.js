@@ -447,7 +447,7 @@ const GRAMMAR = [
     ],
     note:'⚠️ Cannot be used for the speaker\'s own personal emotions (×私は悲しいというものだ).',
     compareTo:'〜というものは (sets up the topic/essence); というものだ asserts what something truly IS'
-  }
+  },
 
   // ════════════════════════════════════════════
   //  ADD NEW UNITS BELOW THIS LINE
