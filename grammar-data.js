@@ -451,21 +451,87 @@ const GRAMMAR = [
 
   // ════════════════════════════════════════════
   //  ADD NEW UNITS BELOW THIS LINE
-  //  Next id to use: 41
-  //  Next unit label: Unit 3-2
-  //
-  //  Template:
-  //  { id:41, unit:'Unit 3-2', pattern:'〜grammar',
-  //    english:'English meaning',
-  //    meaning:'Full explanation.',
-  //    structure:'[接続] ＋ grammar',
-  //    examples:[
-  //      { jp:'Japanese。', en:'English.' },
-  //      { jp:'Japanese。', en:'English.' }
-  //    ],
-  //    note:'Usage warning or tip.',
-  //    compareTo:'Similar grammar and difference'
-  //  },
+  //  Next id to use: 49
+  //  Next unit label: Unit 4-1
   // ════════════════════════════════════════════
-
+{ id:41, unit:'Unit 3-2', pattern:'〜にしろ(〜にしろ)', english:'Whether... or... / Even if...',
+    meaning:'Used to show that the conclusion remains the same regardless of which example or situation applies.',
+    structure:'[普通形(な形・名詞は「だ」を省くか「である」)] ＋ にしろ',
+    examples:[
+      { jp:'参加するにしろしないにしろ、明日までに返事をください。', en:'Whether you participate or not, please give me an answer by tomorrow.' },
+      { jp:'理由が何にしろ、無断で約束を破るのはよくない。', en:'Whatever the reason may be, it is not good to break an appointment without notice.' }
+    ],
+    note:'「にせよ」「にしても」も同じ意味で使われる。More formal than 〜ても〜ても. Used to present contrasting examples that lead to the same conclusion.',
+    compareTo:'〜ても〜ても (same meaning, casual daily use); にしろ〜にしろ is more formal and emphasizes the contrast between two listed examples'
+  },
+  { id:42, unit:'Unit 3-2', pattern:'〜に沿って', english:'Along with... / In accordance with...',
+    meaning:'Used to express taking action in strict accordance with a standard, manual, plan, or path.',
+    structure:'[名詞] ＋ に沿って',
+    examples:[
+      { jp:'このガイドラインに沿って、イベントの準備を進めてください。', en:'Please proceed with the event preparations in accordance with this guideline.' },
+      { jp:'線路に沿って歩いていくと、右側に大きな公園が見えます。', en:'If you walk along the train tracks, you will see a large park on your right.' }
+    ],
+    note:'「計画・マニュアル・方針・期待」などの名詞がよく使われる。Implies fitting closely to a standard or path rather than merely following orders.',
+    compareTo:'〜に従って (implies obedience to instructions/rules); に沿って has a nuance of aligning closely with a standard or route'
+  },
+  { id:43, unit:'Unit 3-2', pattern:'〜かねる', english:'Cannot / Unable to do... (polite refusal)',
+    meaning:'Used as a polite or formal way to refuse or express inability to do something due to certain circumstances.',
+    structure:'[動詞のます形(ますを除く)] ＋ かねる',
+    examples:[
+      { jp:'お客様の個人情報に関しましては、私共ではお答えいたしかねます。', en:'Regarding customers\'s personal information, we are unable to answer.' },
+      { jp:'どちらの服も素敵なので、どちらを買うか決めかねています。', en:'Both clothes are wonderful, so I\'m having a hard time deciding which one to buy.' }
+    ],
+    note:'⚠️ Cannot use when unable due to lack of ability (×英語が話しかねる). Used in business to softly decline while showing willingness in spirit. Very common in formal/business settings.',
+    compareTo:'〜できません (direct refusal); かねる is an indirect, face-saving refusal implying "I would like to but circumstances prevent me"'
+  },
+  { id:44, unit:'Unit 3-2', pattern:'〜ないこともない', english:'It\'s not impossible to... / Not that I can\'t...',
+    meaning:'Used as a double negative to express a weak affirmation or a slight possibility. "It\'s not that I absolutely cannot."',
+    structure:'[動詞のない形 / い形-くない / な形-でない / 名詞-でない] ＋ こともない',
+    examples:[
+      { jp:'辛い料理は苦手ですが、カレーライスなら食べられないこともないです。', en:'I\'m not good with spicy food, but it\'s not that I can\'t eat curry rice.' },
+      { jp:'少し遠いですが、ここから駅まで歩いて行けないこともないですよ。', en:'It is a bit far, but it\'s not impossible to walk to the station from here.' }
+    ],
+    note:'「〜ないことはない」と言い換えることもできる。Expresses reluctant or hedged agreement — not 100% confident. Different from clearly affirming 〜できる or 〜だ.',
+    compareTo:'〜できる / 〜だ (clear affirmation); ないこともない is a cautious, indirect "I suppose it\'s possible"'
+  },
+  { id:45, unit:'Unit 3-2', pattern:'〜てほしいものだ', english:'I strongly hope that... / I really want (others) to...',
+    meaning:'Used to express a strong, heartfelt desire or hope for a situation or someone else\'s action. Often used for social or political wishes.',
+    structure:'[動詞のて形 / ない形-て] ＋ ほしいものだ',
+    examples:[
+      { jp:'若者たちが選挙に関心を持ち、もっと投票に行ってほしいものだ。', en:'I strongly hope that young people will take an interest in elections and go to vote more.' },
+      { jp:'これ以上物価が上がらないでほしいものだと切に願う。', en:'I earnestly wish that prices would stop rising any further.' }
+    ],
+    note:'⚠️ Cannot be used for personal small requests (×ペンを貸してほしいものだ). Used for broader social, political, or general wishes toward others\' behaviour.',
+    compareTo:'〜てください / 〜てほしい (direct requests to someone); てほしいものだ is an indirect, broader societal wish not directed at one specific person'
+  },
+  { id:46, unit:'Unit 3-2', pattern:'〜だけのことはある', english:'No wonder... / It\'s worth it / As expected from...',
+    meaning:'Used to express admiration or understanding that a wonderful result matches its expected cause, effort, or status.',
+    structure:'[動詞・い形の普通形 / な形-な / 名詞] ＋ だけのことはある',
+    examples:[
+      { jp:'彼は10年も日本に住んでいるだけのことはある。日本語がペラペラだ。', en:'No wonder he has lived in Japan for 10 years; his Japanese is fluent.' },
+      { jp:'この料理は高いだけのことはある。素材が新鮮で本当に美味しい。', en:'This dish is worth its high price; the ingredients are fresh and truly delicious.' }
+    ],
+    note:'⚠️ Only used for positive results or compliments. Cannot be used for bad outcomes or low evaluations.',
+    compareTo:'さすが〜だ (simple admiration); だけのことはある explains WHY the good result is justified — the effort/status/experience behind it'
+  },
+  { id:47, unit:'Unit 3-2', pattern:'〜てみせる', english:'I will definitely show you that I can... / I will prove it',
+    meaning:'Used to declare a strong determination to achieve something and prove it to others through actions.',
+    structure:'[動詞のて形] ＋ みせる',
+    examples:[
+      { jp:'次の試験では、死に物狂いで勉強して絶対に合格してみせる。', en:'In the next exam, I will study like crazy and definitely show you that I can pass.' },
+      { jp:'今はまだ小さな店だが、いつか世界一のレストランにしてみせる。', en:'It\'s still a small shop now, but I will make it the best restaurant in the world no matter what.' }
+    ],
+    note:'⚠️ Only used for the speaker\'s own strong determination. Cannot be used for other people\'s actions or simple plans.',
+    compareTo:'〜ようと思う / 〜つもりだ (internal plans); てみせる is a public declaration of determination directed outward to prove oneself'
+  },
+  { id:48, unit:'Unit 3-2', pattern:'〜を契機に', english:'Taking the opportunity of... / With... as a turning point',
+    meaning:'Used to express that a major event or incident serves as a turning point that brings about a significant change.',
+    structure:'[名詞] ＋ を契機に / を契機として (動詞に接続する場合は「〜の」を挟む)',
+    examples:[
+      { jp:'大病を患ったのを契機に、彼はそれまでの生活習慣を完全に改めた。', en:'Taking his serious illness as a turning point, he completely changed his former lifestyle habits.' },
+      { jp:'新製品のヒットを契機に、我が社は海外進出を果たすことができた。', en:'With the hit of the new product as an opportunity, our company was able to expand overseas.' }
+    ],
+    note:'後ろには、何かが新しく始まったり、大きく変化したりする文が来る。Used for significant life or social events — not trivial daily triggers.',
+    compareTo:'〜をきっかけに (same meaning, can be used for small everyday events); を契機に is more formal and reserved for major turning points'
+  },
 ];
