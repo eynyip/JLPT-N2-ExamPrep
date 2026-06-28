@@ -1,29 +1,18 @@
 // ============================================================
-//  N2 GRAMMAR DATA — Edit this file to add new units
-//  Structure per entry:
-//  {
-//    id: (unique number, increment from last),
-//    unit: 'Unit X',          ← e.g. 'Unit 3'
-//    pattern: '〜grammar',
-//    english: 'Meaning in English',
-//    meaning: 'Full explanation sentence',
-//    structure: '[接続] + grammar',
-//    examples: [
-//      { jp: 'Japanese sentence', en: 'English translation' },
-//      { jp: 'Japanese sentence', en: 'English translation' }
-//    ],
-//    note: 'Important usage notes / warnings',
-//    compareTo: 'Similar grammar and how they differ'  ← optional
-//  }
+//  N2 GRAMMAR DATA
+//  To add a new unit: copy a block below, increment the id,
+//  set unit:'Unit X-X', and fill in all fields.
+//  Last id used: 40
 // ============================================================
 
 const GRAMMAR = [
 
   // ════════════════════════════════════════════
-  //  UNIT 1  (2026/3/21)
+  //  UNIT 1-1  (2026/3/21)
+  //  Patterns: からすると, くせに, げ, といえば, にしては
   // ════════════════════════════════════════════
 
-  { id:1, unit:'Unit 1', pattern:'〜からすると', english:'Judging from / From the standpoint of',
+  { id:1, unit:'Unit 1-1', pattern:'〜からすると', english:'Judging from / From the standpoint of',
     meaning:'Used to express a judgment based on evidence, or to state an opinion from a certain standpoint. Expresses a subjective judgment.',
     structure:'[名詞] ＋ からすると',
     examples:[
@@ -33,7 +22,7 @@ const GRAMMAR = [
     note:'More inference-focused than 〜から見ると. Often used for subjective judgments.',
     compareTo:'〜から見ると (similar, but 〜からすると has a stronger inference/judgment nuance)'
   },
-  { id:2, unit:'Unit 1', pattern:'〜くせに', english:'Despite / Although (negative tone)',
+  { id:2, unit:'Unit 1-1', pattern:'〜くせに', english:'Despite / Although (negative tone)',
     meaning:'Used to express blame, criticism, or contempt. Has a stronger negative connotation than のに.',
     structure:'[動詞・い形・な形・名詞(の)] の普通形 ＋ くせに',
     examples:[
@@ -43,7 +32,7 @@ const GRAMMAR = [
     note:'⚠️ Not normally used for oneself (though may be used for self-deprecation). Carries a critical or blaming tone.',
     compareTo:'〜のに (surprise/dissatisfaction), but 〜くせに adds contempt or blame toward the subject'
   },
-  { id:3, unit:'Unit 1', pattern:'〜げ', english:'Looks / Seems (from appearance)',
+  { id:3, unit:'Unit 1-1', pattern:'〜げ', english:'Looks / Seems (from appearance)',
     meaning:'A suffix indicating someone looks or seems to be in a certain state, based on their appearance or expression.',
     structure:'[い形(語幹)・な形(語幹)] ＋ げ',
     examples:[
@@ -53,7 +42,7 @@ const GRAMMAR = [
     note:'⚠️ Not used for one\'s own emotions. Slightly more formal than 〜そうだ. Often attached to emotion words (悲し、不安 etc.).',
     compareTo:'〜そうだ (similar, but 〜げ is more formal/literary)'
   },
-  { id:4, unit:'Unit 1', pattern:'〜といえば', english:'Speaking of / If you say',
+  { id:4, unit:'Unit 1-1', pattern:'〜といえば', english:'Speaking of / If you say',
     meaning:'Used to bring up a related topic, or when something mentioned reminds you of something else.',
     structure:'[名詞・普通形] ＋ といえば',
     examples:[
@@ -63,7 +52,7 @@ const GRAMMAR = [
     note:'Useful for adding new but related information to a conversation. Works like a chain-of-association topic shift.',
     compareTo:'〜と言うと ≒ same; but 〜といえば is better for chaining associated topics'
   },
-  { id:5, unit:'Unit 1', pattern:'〜にしては', english:'For / Considering',
+  { id:5, unit:'Unit 1-1', pattern:'〜にしては', english:'For / Considering',
     meaning:'Used when actual results differ from what would normally be expected given a certain standard.',
     structure:'[名詞・動詞普通形] ＋ にしては',
     examples:[
@@ -73,7 +62,13 @@ const GRAMMAR = [
     note:'Often followed by a concrete number or name. The result is usually unexpected — better or worse than expected.',
     compareTo:'〜わりに (similar meaning, but にしては focuses more on a specific benchmark)'
   },
-  { id:6, unit:'Unit 1', pattern:'〜にもかかわらず', english:'Despite / In spite of',
+
+  // ════════════════════════════════════════════
+  //  UNIT 1-1 continued
+  //  Patterns: にもかかわらず, もしない, をめぐって
+  // ════════════════════════════════════════════
+
+  { id:6, unit:'Unit 1-1', pattern:'〜にもかかわらず', english:'Despite / In spite of',
     meaning:'Formal expression for "despite" or "regardless of." The outcome is opposite to what the situation would suggest.',
     structure:'[普通形(な形/名詞:だ)] ＋ にもかかわらず',
     examples:[
@@ -83,7 +78,7 @@ const GRAMMAR = [
     note:'More formal than 〜のに. Indicates a result clearly opposite to what was expected.',
     compareTo:'〜のに (same meaning, but にもかかわらず is more formal/written)'
   },
-  { id:7, unit:'Unit 1', pattern:'〜もしない', english:'Not even / Without even',
+  { id:7, unit:'Unit 1-1', pattern:'〜もしない', english:'Not even / Without even',
     meaning:'Emphasizes that someone does not do something at all. Often carries a tone of surprise or criticism.',
     structure:'[動詞ます形(〜ます)] ＋ もしない',
     examples:[
@@ -93,7 +88,7 @@ const GRAMMAR = [
     note:'Emphasis pattern. Heightens the sense of complete negation or surprising omission.',
     compareTo:'〜もせずに (similar; もしない is slightly stronger in emphasis)'
   },
-  { id:8, unit:'Unit 1', pattern:'〜をめぐって', english:'Concerning / Surrounding (a dispute)',
+  { id:8, unit:'Unit 1-1', pattern:'〜をめぐって', english:'Concerning / Surrounding (a dispute)',
     meaning:'Used when multiple people or groups are arguing, competing, or actively discussing a specific issue.',
     structure:'[名詞] ＋ をめぐって',
     examples:[
@@ -105,10 +100,13 @@ const GRAMMAR = [
   },
 
   // ════════════════════════════════════════════
-  //  UNIT 2  (2026/4/11)
+  //  UNIT 1-2  (2026/4/11)
+  //  Patterns: 一方で, かいがあって, っこない,
+  //            というものは, どころではない, はさておき,
+  //            はもとより, を抜きに
   // ════════════════════════════════════════════
 
-  { id:9, unit:'Unit 2', pattern:'〜一方(で)', english:'On the one hand / While / At the same time',
+  { id:9, unit:'Unit 1-2', pattern:'〜一方(で)', english:'On the one hand / While / At the same time',
     meaning:'Describes two contrasting aspects of a situation, or two things happening simultaneously.',
     structure:'[普通形] ＋ 一方(で)',
     examples:[
@@ -118,7 +116,7 @@ const GRAMMAR = [
     note:'Can also mean "keeps getting more/less" when used alone (減る一方 = keeps decreasing).',
     compareTo:'〜反面 (similar contrast, but 反面 implies the two sides are contradictory qualities of the same thing)'
   },
-  { id:10, unit:'Unit 2', pattern:'〜かいがあって', english:'It was worth... / Thanks to... (positive result)',
+  { id:10, unit:'Unit 1-2', pattern:'〜かいがあって', english:'It was worth... / Thanks to... (positive result)',
     meaning:'Expresses that an effort or action has led to the expected positive result.',
     structure:'[動詞た形・名詞(の)] ＋ かいがあって',
     examples:[
@@ -128,7 +126,7 @@ const GRAMMAR = [
     note:'⚠️ Only used for positive/good results. Cannot be used when the outcome is bad.',
     compareTo:'〜おかげで (similar positive result, but かいがあって emphasizes the effort was justified)'
   },
-  { id:11, unit:'Unit 2', pattern:'〜っこない', english:'No way / Definitely not (colloquial)',
+  { id:11, unit:'Unit 1-2', pattern:'〜っこない', english:'No way / Definitely not (colloquial)',
     meaning:'A strong, colloquial negation meaning "there\'s no way" or "it\'s impossible."',
     structure:'[動詞ます形(〜ます)] ＋ っこない',
     examples:[
@@ -138,7 +136,7 @@ const GRAMMAR = [
     note:'⚠️ Casual expression. Avoid using with superiors (目上の人). Implies 100% impossibility.',
     compareTo:'〜わけがない (same meaning, but more neutral register); っこない is more colloquial/emphatic'
   },
-  { id:12, unit:'Unit 2', pattern:'〜というものは', english:'Something like... / ...is a thing that...',
+  { id:12, unit:'Unit 1-2', pattern:'〜というものは', english:'Something like... / ...is a thing that...',
     meaning:'Used when defining the essence or general nature of something. Makes a philosophical or general statement.',
     structure:'[名詞] ＋ というものは',
     examples:[
@@ -148,87 +146,7 @@ const GRAMMAR = [
     note:'Often followed by ものだ or ものではない at the end. Used to make general truths or philosophical observations.',
     compareTo:'〜というものだ (similar; というものは sets up the topic, then describes its nature)'
   },
-  { id:13, unit:'Unit 2', pattern:'〜やら〜やら', english:'...and... / Such things as... (overwhelmed listing)',
-    meaning:'Used to list examples that are causing confusion, busyness, or difficulty. Implies there are even more things.',
-    structure:'[名詞 / 動詞辞書形 / い形容詞] ＋ やら',
-    examples:[
-      { jp:'宿題やら仕事やらで、今週は寝る暇もない。', en:'With homework, work, and other things, I have no time to sleep this week.' },
-      { jp:'財布を落とすやら雨に降られるやら、散々な一日だった。', en:'What with losing my wallet and getting rained on, it was a terrible day.' }
-    ],
-    note:'Conveys the speaker\'s confusion or overwhelm. Used in negative/stressful contexts.',
-    compareTo:'〜や〜など (neutral listing); やら〜やら adds a nuance of chaos or stress'
-  },
-  { id:14, unit:'Unit 2', pattern:'〜か〜ないかのうちに', english:'No sooner than / Just as',
-    meaning:'Used when the next action occurs almost simultaneously with the end of the first.',
-    structure:'[動詞辞書形/た形] ＋ か ＋ [動詞ない形] ＋ かのうちに',
-    examples:[
-      { jp:'授業が終わるか終わらないかのうちに、彼は教室を飛び出した。', en:'No sooner had the class ended than he rushed out of the classroom.' },
-      { jp:'布団に入るか入らないかのうちに、眠ってしまった。', en:'I fell asleep almost as soon as I got into bed.' }
-    ],
-    note:'⚠️ Cannot be followed by volitional/request sentences. Emphasizes the simultaneous/instantaneous nature.',
-    compareTo:'〜たとたん (sudden change after something); 〜かのうちに emphasizes "barely had time to finish"'
-  },
-  { id:15, unit:'Unit 2', pattern:'〜ばかりか', english:'Not only... but also',
-    meaning:'Adds something even more significant to what is already stated.',
-    structure:'[普通形(な形-な/である・名詞-である)] ＋ ばかりか',
-    examples:[
-      { jp:'彼は英語ばかりか、中国語もペラペラだ。', en:'He is fluent not only in English but also in Chinese.' },
-      { jp:'この薬は効かないばかりか、副作用が出ることもある。', en:'This medicine is not only ineffective but can also cause side effects.' }
-    ],
-    note:'Both clauses must have the same polarity (both positive or both negative).',
-    compareTo:'〜だけでなく (similar, but ばかりか is more formal and the B part is more surprising/emphatic)'
-  },
-  { id:16, unit:'Unit 2', pattern:'〜ずにはいられない', english:'Cannot help but... / Can\'t resist...',
-    meaning:'Used when the speaker cannot suppress a feeling or desire — they naturally do it involuntarily.',
-    structure:'[動詞ない形(〜ない)] ＋ ずにはいられない (する→せずには)',
-    examples:[
-      { jp:'隣の人の話が面白くて、笑わずにはいられない。', en:'I can\'t help but laugh because what the person next to me is saying is so funny.' },
-      { jp:'あの映画を見たら、だれもが感動せずにはいられないだろう。', en:'Anyone who sees that movie will not be able to help being moved.' }
-    ],
-    note:'Subject is basically the speaker. For others, add 〜ようだ or 〜らしい. Slightly more formal/literary.',
-    compareTo:'〜ないではいられない (same meaning, slightly more spoken)'
-  },
-  { id:17, unit:'Unit 2', pattern:'〜以上(は)', english:'Since / Now that / Given that',
-    meaning:'Expresses a strong determination, judgment, or obligation based on a certain situation.',
-    structure:'[普通形(な形-である/名詞-である)] ＋ 以上(は)',
-    examples:[
-      { jp:'日本で働く以上、敬語を覚えなければならない。', en:'Since you work in Japan, you must learn honorifics.' },
-      { jp:'引き受けた以上、最後まで責任を持ってやり遂げるつもりだ。', en:'Now that I\'ve accepted the task, I intend to carry it out responsibly to the end.' }
-    ],
-    note:'Often followed by べきだ, なければならない, つもりだ — strong will or obligation.',
-    compareTo:'〜からには (similar; 以上 is based more on objective situations, からには is slightly more personal)'
-  },
-  { id:18, unit:'Unit 2', pattern:'〜折に(は)', english:'When / On the occasion of (formal)',
-    meaning:'Formal way to say "when" or "on the occasion of." Often carries a nuance of a good/convenient opportunity.',
-    structure:'[名詞の / 動詞連体形] ＋ 折に',
-    examples:[
-      { jp:'次に来日された折に、ぜひ弊社にお立ち寄りください。', en:'The next time you come to Japan, please feel free to stop by our office.' },
-      { jp:'先日お会いした折に、お話しした件についてご報告します。', en:'I would like to report on the matter we discussed when we met the other day.' }
-    ],
-    note:'Used in formal letters and business communication. Not for trivial daily habits.',
-    compareTo:'〜際に (similar, formal); 折に sometimes implies a lucky/good timing'
-  },
-  { id:19, unit:'Unit 2', pattern:'〜からして', english:'Judging from / Even... (inference from one aspect)',
-    meaning:'Judges the whole from one part. "Even just looking at X, you can tell Y." Often used for negative assessments.',
-    structure:'[名詞] ＋ からして',
-    examples:[
-      { jp:'あの店は看板の文字からして、入る気が起きない。', en:'Judging from even the lettering on the sign, I don\'t feel like going into that restaurant.' },
-      { jp:'彼の態度は、挨拶の仕方からして失礼だ。', en:'His attitude is rude, starting with the way he greets people.' }
-    ],
-    note:'Often used for negative evaluations. "Even at the most basic level, it\'s bad."',
-    compareTo:'〜からすると (similar but からして implies "starting from this one thing, everything is wrong")'
-  },
-  { id:20, unit:'Unit 2', pattern:'〜次第(しだい)', english:'As soon as / Immediately after',
-    meaning:'Expresses that an action will be taken immediately after something is completed.',
-    structure:'[動詞ます形(〜ます)] ＋ 次第',
-    examples:[
-      { jp:'資料ができ次第、メールでお送りいたします。', en:'As soon as the materials are ready, I will send them via email.' },
-      { jp:'準備が整い次第、会議を始めましょう。', en:'Let\'s start the meeting as soon as the preparations are complete.' }
-    ],
-    note:'Cannot be used for past events. Forward-looking only. More formal than 〜たらすぐ.',
-    compareTo:'〜たらすぐ (similar, but more casual); 次第 is more formal and implies immediacy'
-  },
-  { id:21, unit:'Unit 2', pattern:'〜どころではない', english:'Far from / Not the time for / Out of the question',
+  { id:13, unit:'Unit 1-2', pattern:'〜どころではない', english:'Far from / Not the time for / Out of the question',
     meaning:'Indicates that a situation is so extreme/busy that doing something else is completely out of the question.',
     structure:'[名詞・動詞普通形] ＋ どころではない',
     examples:[
@@ -238,7 +156,7 @@ const GRAMMAR = [
     note:'The situation described is extreme — far worse than normal.',
     compareTo:'〜わけではない (just denies something); どころではない implies the situation is severe'
   },
-  { id:22, unit:'Unit 2', pattern:'〜はさておき', english:'Setting aside / Aside from',
+  { id:14, unit:'Unit 1-2', pattern:'〜はさておき', english:'Setting aside / Aside from',
     meaning:'Temporarily sets aside one topic to move on to a more important or immediate one.',
     structure:'[名詞] ＋ はさておき',
     examples:[
@@ -248,7 +166,7 @@ const GRAMMAR = [
     note:'Acknowledges the topic, then redirects. The set-aside topic is not ignored — just prioritized later.',
     compareTo:'〜はともかく (similar; はさておき implies "put it aside for now"; はともかく implies "even if we ignore it")'
   },
-  { id:23, unit:'Unit 2', pattern:'〜はもとより', english:'Needless to say / Not only... but also (formal)',
+  { id:15, unit:'Unit 1-2', pattern:'〜はもとより', english:'Needless to say / Not only... but also (formal)',
     meaning:'Formal way of saying "not only A, but also B." A is taken for granted; B adds further emphasis.',
     structure:'[名詞] ＋ はもとより',
     examples:[
@@ -258,7 +176,7 @@ const GRAMMAR = [
     note:'More formal than はもちろん. A (the first item) is assumed/obvious; B is the added point.',
     compareTo:'〜はもちろん (same meaning, slightly less formal)'
   },
-  { id:24, unit:'Unit 2', pattern:'〜を抜きに(して)', english:'Without / Leaving out / Excluding',
+  { id:16, unit:'Unit 1-2', pattern:'〜を抜きに(して)', english:'Without / Leaving out / Excluding',
     meaning:'Doing something without including a necessary or important element.',
     structure:'[名詞] ＋ を抜きに(して)',
     examples:[
@@ -268,7 +186,102 @@ const GRAMMAR = [
     note:'Implies that the excluded element is normally necessary or expected.',
     compareTo:'〜なしに (similar; を抜きに has a nuance of "consciously removing" something important)'
   },
-  { id:25, unit:'Unit 2', pattern:'〜限り', english:'As long as / As far as',
+
+  // ════════════════════════════════════════════
+  //  UNIT 2-1  (2026/4/11 continued)
+  //  Patterns: やら〜やら, か〜ないかのうちに, ばかりか,
+  //            ずにはいられない, 以上は, 折に, からして, 次第
+  // ════════════════════════════════════════════
+
+  { id:17, unit:'Unit 2-1', pattern:'〜やら〜やら', english:'...and... / Such things as... (overwhelmed listing)',
+    meaning:'Used to list examples that are causing confusion, busyness, or difficulty. Implies there are even more things.',
+    structure:'[名詞 / 動詞辞書形 / い形容詞] ＋ やら',
+    examples:[
+      { jp:'宿題やら仕事やらで、今週は寝る暇もない。', en:'With homework, work, and other things, I have no time to sleep this week.' },
+      { jp:'財布を落とすやら雨に降られるやら、散々な一日だった。', en:'What with losing my wallet and getting rained on, it was a terrible day.' }
+    ],
+    note:'Conveys the speaker\'s confusion or overwhelm. Used in negative/stressful contexts.',
+    compareTo:'〜や〜など (neutral listing); やら〜やら adds a nuance of chaos or stress'
+  },
+  { id:18, unit:'Unit 2-1', pattern:'〜か〜ないかのうちに', english:'No sooner than / Just as',
+    meaning:'Used when the next action occurs almost simultaneously with the end of the first.',
+    structure:'[動詞辞書形/た形] ＋ か ＋ [動詞ない形] ＋ かのうちに',
+    examples:[
+      { jp:'授業が終わるか終わらないかのうちに、彼は教室を飛び出した。', en:'No sooner had the class ended than he rushed out of the classroom.' },
+      { jp:'布団に入るか入らないかのうちに、眠ってしまった。', en:'I fell asleep almost as soon as I got into bed.' }
+    ],
+    note:'⚠️ Cannot be followed by volitional/request sentences. Emphasizes the simultaneous/instantaneous nature.',
+    compareTo:'〜たとたん (sudden change after something); 〜かのうちに emphasizes "barely had time to finish"'
+  },
+  { id:19, unit:'Unit 2-1', pattern:'〜ばかりか', english:'Not only... but also',
+    meaning:'Adds something even more significant to what is already stated.',
+    structure:'[普通形(な形-な/である・名詞-である)] ＋ ばかりか',
+    examples:[
+      { jp:'彼は英語ばかりか、中国語もペラペラだ。', en:'He is fluent not only in English but also in Chinese.' },
+      { jp:'この薬は効かないばかりか、副作用が出ることもある。', en:'This medicine is not only ineffective but can also cause side effects.' }
+    ],
+    note:'Both clauses must have the same polarity (both positive or both negative).',
+    compareTo:'〜だけでなく (similar, but ばかりか is more formal and the B part is more surprising/emphatic)'
+  },
+  { id:20, unit:'Unit 2-1', pattern:'〜ずにはいられない', english:'Cannot help but... / Can\'t resist...',
+    meaning:'Used when the speaker cannot suppress a feeling or desire — they naturally do it involuntarily.',
+    structure:'[動詞ない形(〜ない)] ＋ ずにはいられない (する→せずには)',
+    examples:[
+      { jp:'隣の人の話が面白くて、笑わずにはいられない。', en:'I can\'t help but laugh because what the person next to me is saying is so funny.' },
+      { jp:'あの映画を見たら、だれもが感動せずにはいられないだろう。', en:'Anyone who sees that movie will not be able to help being moved.' }
+    ],
+    note:'Subject is basically the speaker. For others, add 〜ようだ or 〜らしい. Slightly more formal/literary.',
+    compareTo:'〜ないではいられない (same meaning, slightly more spoken)'
+  },
+  { id:21, unit:'Unit 2-1', pattern:'〜以上(は)', english:'Since / Now that / Given that',
+    meaning:'Expresses a strong determination, judgment, or obligation based on a certain situation.',
+    structure:'[普通形(な形-である/名詞-である)] ＋ 以上(は)',
+    examples:[
+      { jp:'日本で働く以上、敬語を覚えなければならない。', en:'Since you work in Japan, you must learn honorifics.' },
+      { jp:'引き受けた以上、最後まで責任を持ってやり遂げるつもりだ。', en:'Now that I\'ve accepted the task, I intend to carry it out responsibly to the end.' }
+    ],
+    note:'Often followed by べきだ, なければならない, つもりだ — strong will or obligation.',
+    compareTo:'〜からには (similar; 以上 is based more on objective situations, からには is slightly more personal)'
+  },
+  { id:22, unit:'Unit 2-1', pattern:'〜折に(は)', english:'When / On the occasion of (formal)',
+    meaning:'Formal way to say "when" or "on the occasion of." Often carries a nuance of a good/convenient opportunity.',
+    structure:'[名詞の / 動詞連体形] ＋ 折に',
+    examples:[
+      { jp:'次に来日された折に、ぜひ弊社にお立ち寄りください。', en:'The next time you come to Japan, please feel free to stop by our office.' },
+      { jp:'先日お会いした折に、お話しした件についてご報告します。', en:'I would like to report on the matter we discussed when we met the other day.' }
+    ],
+    note:'Used in formal letters and business communication. Not for trivial daily habits.',
+    compareTo:'〜際に (similar, formal); 折に sometimes implies a lucky/good timing'
+  },
+  { id:23, unit:'Unit 2-1', pattern:'〜からして', english:'Judging from / Even... (inference from one aspect)',
+    meaning:'Judges the whole from one part. "Even just looking at X, you can tell Y." Often used for negative assessments.',
+    structure:'[名詞] ＋ からして',
+    examples:[
+      { jp:'あの店は看板の文字からして、入る気が起きない。', en:'Judging from even the lettering on the sign, I don\'t feel like going into that restaurant.' },
+      { jp:'彼の態度は、挨拶の仕方からして失礼だ。', en:'His attitude is rude, starting with the way he greets people.' }
+    ],
+    note:'Often used for negative evaluations. "Even at the most basic level, it\'s bad."',
+    compareTo:'〜からすると (similar but からして implies "starting from this one thing, everything is wrong")'
+  },
+  { id:24, unit:'Unit 2-1', pattern:'〜次第(しだい)', english:'As soon as / Immediately after',
+    meaning:'Expresses that an action will be taken immediately after something is completed.',
+    structure:'[動詞ます形(〜ます)] ＋ 次第',
+    examples:[
+      { jp:'資料ができ次第、メールでお送りいたします。', en:'As soon as the materials are ready, I will send them via email.' },
+      { jp:'準備が整い次第、会議を始めましょう。', en:'Let\'s start the meeting as soon as the preparations are complete.' }
+    ],
+    note:'Cannot be used for past events. Forward-looking only. More formal than 〜たらすぐ.',
+    compareTo:'〜たらすぐ (similar, but more casual); 次第 is more formal and implies immediacy'
+  },
+
+  // ════════════════════════════════════════════
+  //  UNIT 2-2  (2026/4/11 continued)
+  //  Patterns: 限り, たいものだ, ないものか,
+  //            はともかく, だけまし, きり,
+  //            に先立って, っぽい
+  // ════════════════════════════════════════════
+
+  { id:25, unit:'Unit 2-2', pattern:'〜限り', english:'As long as / As far as',
     meaning:'Expresses a condition that must continue, or the limits of one\'s knowledge/scope.',
     structure:'[普通形(な形-な/名詞-である)] ＋ 限り',
     examples:[
@@ -278,7 +291,7 @@ const GRAMMAR = [
     note:'The following sentence often contains words expressing conditions, will, or judgment.',
     compareTo:'〜うちに (time limit before change); 限り focuses on a continuing condition'
   },
-  { id:26, unit:'Unit 2', pattern:'〜たいものだ', english:'Really want to / Truly wish (heartfelt desire)',
+  { id:26, unit:'Unit 2-2', pattern:'〜たいものだ', english:'Really want to / Truly wish (heartfelt desire)',
     meaning:'Expresses a strong, heartfelt desire or longing — often for something difficult to achieve.',
     structure:'[動詞ます形(〜ます)] ＋ たいものだ',
     examples:[
@@ -288,7 +301,7 @@ const GRAMMAR = [
     note:'⚠️ Not used for direct requests. Expresses longing, not demands.',
     compareTo:'〜たい (simple desire); たいものだ is more emotive and often about long-term wishes'
   },
-  { id:27, unit:'Unit 2', pattern:'〜ないものか', english:'Can\'t we...? / Is there no way to...?',
+  { id:27, unit:'Unit 2-2', pattern:'〜ないものか', english:'Can\'t we...? / Is there no way to...?',
     meaning:'Expresses a strong desire for something difficult to happen. Wonders if there\'s any possibility.',
     structure:'[動詞ない形] ＋ ものか / ものだろうか',
     examples:[
@@ -298,7 +311,7 @@ const GRAMMAR = [
     note:'Can also use できないものか (possibility form). Implies the speaker feels it\'s difficult but hopes.',
     compareTo:'〜たいものだ (pure longing); ないものか includes a nuance of looking for a solution/way'
   },
-  { id:28, unit:'Unit 2', pattern:'〜はともかく', english:'Setting aside / Regardless of',
+  { id:28, unit:'Unit 2-2', pattern:'〜はともかく', english:'Setting aside / Regardless of',
     meaning:'Acknowledges A may have issues, but shifts focus to the more important or relevant point B.',
     structure:'[名詞] ＋ (は)ともかく',
     examples:[
@@ -308,7 +321,7 @@ const GRAMMAR = [
     note:'A is acknowledged but temporarily ignored. Unlike はさておき, implies "even if A is an issue, B is still true."',
     compareTo:'〜はさておき (put aside for now); はともかく (even if that\'s the case, B is still true)'
   },
-  { id:29, unit:'Unit 2', pattern:'〜だけまし', english:'At least / Better than nothing',
+  { id:29, unit:'Unit 2-2', pattern:'〜だけまし', english:'At least / Better than nothing',
     meaning:'Says that although the situation isn\'t ideal, it\'s better than the worst case.',
     structure:'[普通形(な形-な/名詞-だ)] ＋ だけまし',
     examples:[
@@ -318,7 +331,7 @@ const GRAMMAR = [
     note:'A worse scenario is implied in the background. Used to find comfort in a bad situation.',
     compareTo:'〜ほうがいい (choosing between options); だけまし is about making peace with a bad outcome'
   },
-  { id:30, unit:'Unit 2', pattern:'〜きり', english:'Since... and no change / Only (and nothing since)',
+  { id:30, unit:'Unit 2-2', pattern:'〜きり', english:'Since... and no change / Only (and nothing since)',
     meaning:'Describes a state that has continued unchanged since a specific action occurred.',
     structure:'[動詞た形] ＋ きり',
     examples:[
@@ -328,7 +341,7 @@ const GRAMMAR = [
     note:'N2 focuses on 〜きり meaning "since then, no change." 名詞+きり also means "only."',
     compareTo:'〜まま (also means "left in a state"); きり emphasizes "since that one action, nothing more"'
   },
-  { id:31, unit:'Unit 2', pattern:'〜に先立って', english:'Prior to / Before (formal preparation)',
+  { id:31, unit:'Unit 2-2', pattern:'〜に先立って', english:'Prior to / Before (formal preparation)',
     meaning:'Describes an action taken as preparation or in advance of a major event or official occasion.',
     structure:'[名詞] / [動詞辞書形(の)] ＋ に先立って',
     examples:[
@@ -338,7 +351,7 @@ const GRAMMAR = [
     note:'⚠️ Not used for trivial daily habits. Formal expression for significant events.',
     compareTo:'〜の前に (neutral, for any timing); に先立って is for significant/formal prior actions'
   },
-  { id:32, unit:'Unit 2', pattern:'〜っぽい', english:'-ish / Looks like / Tends to',
+  { id:32, unit:'Unit 2-2', pattern:'〜っぽい', english:'-ish / Looks like / Tends to',
     meaning:'Indicates something has a strong tendency or appearance of a certain quality. Often slightly negative.',
     structure:'[名詞] / [い形(語幹)] / [な形(語幹)] / [ます形] ＋ っぽい',
     examples:[
@@ -350,10 +363,12 @@ const GRAMMAR = [
   },
 
   // ════════════════════════════════════════════
-  //  UNIT 3  (2026/6/20)
+  //  UNIT 3-1  (2026/5/16 + 2026/6/20)
+  //  Patterns: がたい, 得ない, あまり, こととなると,
+  //            つつある, ては〜ては, てこそ, というものだ
   // ════════════════════════════════════════════
 
-  { id:33, unit:'Unit 3', pattern:'〜がたい', english:'Hard to do / Difficult to... (psychological)',
+  { id:33, unit:'Unit 3-1', pattern:'〜がたい', english:'Hard to do / Difficult to... (psychological)',
     meaning:'Used to express that something is psychologically or emotionally hard to do, even if one tries.',
     structure:'[動詞ます形(〜ます)] ＋ がたい',
     examples:[
@@ -363,7 +378,7 @@ const GRAMMAR = [
     note:'⚠️ Cannot use for lack of ability (×泳げない etc.). Focus is psychological difficulty.',
     compareTo:'〜にくい (physical difficulty); づらい (unpleasant to do); がたい (psychologically near-impossible)'
   },
-  { id:34, unit:'Unit 3', pattern:'〜得ない', english:'Impossible / Cannot possibly happen',
+  { id:34, unit:'Unit 3-1', pattern:'〜得ない', english:'Impossible / Cannot possibly happen',
     meaning:'Expresses that something is objectively impossible — zero possibility based on facts or logic.',
     structure:'[動詞ます形(〜ます)] ＋ 得ない (えない)',
     examples:[
@@ -373,7 +388,7 @@ const GRAMMAR = [
     note:'⚠️ Affirmative is 〜得る (える/うる); Negative is always 〜得ない (えない, never うない).',
     compareTo:'〜わけがない (subjective strong denial); 得ない is objective/logical impossibility'
   },
-  { id:35, unit:'Unit 3', pattern:'〜あまり', english:'So much that... / Out of extreme...',
+  { id:35, unit:'Unit 3-1', pattern:'〜あまり', english:'So much that... / Out of extreme...',
     meaning:'Expresses that an extreme emotion or state leads to an unusual or unintended result.',
     structure:'[動詞辞書形・た形 / な形-な / 名詞-の] ＋ あまり (※い形 → nominalize: うれしさのあまり)',
     examples:[
@@ -383,7 +398,7 @@ const GRAMMAR = [
     note:'End of sentence often has uncontrollable/unconscious actions or bad results. い形 adjectives need nominalization.',
     compareTo:'〜てたまらない (can\'t stand the feeling); あまり emphasizes the consequence/result of excess'
   },
-  { id:36, unit:'Unit 3', pattern:'〜こととなると', english:'When it comes to... (sudden attitude change)',
+  { id:36, unit:'Unit 3-1', pattern:'〜こととなると', english:'When it comes to... (sudden attitude change)',
     meaning:'Used to indicate that someone\'s attitude or intensity suddenly changes when a specific topic is brought up.',
     structure:'[名詞-の / 動詞辞書形] ＋ こととなると',
     examples:[
@@ -393,7 +408,7 @@ const GRAMMAR = [
     note:'The second clause usually describes an unusual, atypical behavior (becomes intense, angry, talkative).',
     compareTo:'〜に関しては (just mentions a topic neutrally); こととなると implies personality/attitude shift'
   },
-  { id:37, unit:'Unit 3', pattern:'〜つつある', english:'In the process of... / Gradually -ing (formal)',
+  { id:37, unit:'Unit 3-1', pattern:'〜つつある', english:'In the process of... / Gradually -ing (formal)',
     meaning:'Expresses the fact that a gradual change is currently in progress.',
     structure:'[動詞ます形(〜ます)] ＋ つつある',
     examples:[
@@ -403,7 +418,7 @@ const GRAMMAR = [
     note:'⚠️ Cannot use with instant/non-gradual actions (食べる、読む). Used for slow changes (増える、減る、変わる).',
     compareTo:'〜ている (general ongoing state); つつある emphasizes gradual change in progress'
   },
-  { id:38, unit:'Unit 3', pattern:'〜ては(〜ては)', english:'Whenever... / Keeps doing... (repeated pattern)',
+  { id:38, unit:'Unit 3-1', pattern:'〜ては(〜ては)', english:'Whenever... / Keeps doing... (repeated pattern)',
     meaning:'Expresses that whenever a certain action occurs, another action always follows — a repeated pattern.',
     structure:'[動詞て形] ＋ は',
     examples:[
@@ -413,7 +428,7 @@ const GRAMMAR = [
     note:'⚠️ Cannot be used for one-time events. Connects two contrasting repeated actions (open→close, write→erase).',
     compareTo:'〜たびに (every time something happens); ては〜ては emphasizes the back-and-forth repetition'
   },
-  { id:39, unit:'Unit 3', pattern:'〜てこそ', english:'Only after doing... / It is only when...',
+  { id:39, unit:'Unit 3-1', pattern:'〜てこそ', english:'Only after doing... / It is only when...',
     meaning:'Emphasizes that a true value or meaning is realized only after a certain action is taken.',
     structure:'[動詞て形] ＋ こそ',
     examples:[
@@ -423,7 +438,7 @@ const GRAMMAR = [
     note:'⚠️ Cannot be used for mere past facts. The speaker makes a strong value assertion.',
     compareTo:'〜て初めて (first time realization); てこそ adds the speaker\'s strong judgment/value claim'
   },
-  { id:40, unit:'Unit 3', pattern:'〜というものだ', english:'It truly is... / That\'s what you call...',
+  { id:40, unit:'Unit 3-1', pattern:'〜というものだ', english:'It truly is... / That\'s what you call...',
     meaning:'Used to express the speaker\'s strong assertion, common sense, or the true nature of something.',
     structure:'[普通形(な形・名詞は「だ」省略多)] ＋ というものだ',
     examples:[
@@ -435,9 +450,22 @@ const GRAMMAR = [
   }
 
   // ════════════════════════════════════════════
-  //  ADD FUTURE UNITS BELOW THIS LINE
-  //  Copy the block above, increment the id,
-  //  set unit:'Unit 4', and fill in the fields.
+  //  ADD NEW UNITS BELOW THIS LINE
+  //  Next id to use: 41
+  //  Next unit label: Unit 3-2
+  //
+  //  Template:
+  //  { id:41, unit:'Unit 3-2', pattern:'〜grammar',
+  //    english:'English meaning',
+  //    meaning:'Full explanation.',
+  //    structure:'[接続] ＋ grammar',
+  //    examples:[
+  //      { jp:'Japanese。', en:'English.' },
+  //      { jp:'Japanese。', en:'English.' }
+  //    ],
+  //    note:'Usage warning or tip.',
+  //    compareTo:'Similar grammar and difference'
+  //  },
   // ════════════════════════════════════════════
 
 ];
