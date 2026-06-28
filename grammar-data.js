@@ -454,6 +454,7 @@ const GRAMMAR = [
   //  Next id to use: 49
   //  Next unit label: Unit 4-1
   // ════════════════════════════════════════════
+  
 { id:41, unit:'Unit 3-2', pattern:'〜にしろ(〜にしろ)', english:'Whether... or... / Even if...',
     meaning:'Used to show that the conclusion remains the same regardless of which example or situation applies.',
     structure:'[普通形(な形・名詞は「だ」を省くか「である」)] ＋ にしろ',
