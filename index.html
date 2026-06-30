@@ -334,7 +334,7 @@ const db    = getFirestore(fbApp);
 // ══════════════════════════════════════════════
 //  PIN CONFIG  ← change your PIN here
 // ══════════════════════════════════════════════
-const CORRECT_PIN = '1201';
+const CORRECT_PIN = '1234';
 const USER_DOC    = 'user_default'; // single-user doc in Firestore
 
 // ══════════════════════════════════════════════
@@ -710,9 +710,23 @@ function getDueQueue() {
 function renderReview() {
   reviewQueue = shuffle(getDueQueue());
   reviewIdx = 0;
+  renderReviewList();
+}
+
+function boxPillsHtml() {
+  const boxCounts = {1:0,2:0,3:0,4:0,5:0};
+  [...studiedSet].forEach(id => { boxCounts[getBoxInfo(id).box]++; });
+  return `<div class="box-pills">
+      ${[1,2,3,4,5].map(b=>`<span class="box-pill b${b}">Box ${b}: ${boxCounts[b]}</span>`).join('')}
+    </div>`;
+}
+
+function renderReviewList() {
+  const totalStudied = studiedSet.size;
+
   if (reviewQueue.length === 0) {
-    const totalStudied = studiedSet.size;
     document.getElementById('review').innerHTML = `
+      ${totalStudied>0 ? boxPillsHtml() : ''}
       <div class="review-empty">
         <div style="font-size:40px;margin-bottom:12px;">✅</div>
         <h3 style="margin-bottom:8px;">All caught up!</h3>
@@ -721,44 +735,24 @@ function renderReview() {
             ? 'Open some grammar cards in Overview first — Review pulls from patterns you\'ve already studied.'
             : 'Nothing is due for review right now. Come back tomorrow, or open new cards in Overview to add them to your review schedule.'}
         </p>
+        <button class="btn" style="margin-top:16px;" onclick="renderReview()">🔄 Check Again</button>
       </div>`;
     return;
   }
-  renderReviewCard();
-}
 
-function renderReviewCard() {
-  if (reviewIdx >= reviewQueue.length) {
-    document.getElementById('review').innerHTML = `
-      <div class="review-empty">
-        <div style="font-size:40px;margin-bottom:12px;">🎉</div>
-        <h3 style="margin-bottom:8px;">Review session complete!</h3>
-        <p style="color:var(--muted);font-size:14px;">You cleared ${reviewQueue.length} due pattern${reviewQueue.length>1?'s':''}.</p>
-        <button class="btn" style="margin-top:18px;" onclick="renderReview()">Check Again</button>
-      </div>`;
-    return;
-  }
-  const g = reviewQueue[reviewIdx];
-  const info = getBoxInfo(g.id);
-  const dueCount = reviewQueue.length - reviewIdx;
+  let html = boxPillsHtml();
+  html += `<div style="text-align:center;color:var(--muted);font-size:13px;margin-bottom:16px;">
+      ${reviewQueue.length} due for review — tap "Show meaning" on each card
+    </div>`;
 
-  // box distribution pills (overview of where things stand)
-  const boxCounts = {1:0,2:0,3:0,4:0,5:0};
-  [...studiedSet].forEach(id => { boxCounts[getBoxInfo(id).box]++; });
-
-  document.getElementById('review').innerHTML = `
-    <div class="box-pills">
-      ${[1,2,3,4,5].map(b=>`<span class="box-pill b${b}">Box ${b}: ${boxCounts[b]}</span>`).join('')}
-    </div>
-    <div style="text-align:center;color:var(--muted);font-size:13px;margin-bottom:14px;">
-      ${dueCount} due for review
-    </div>
-    <div class="review-card">
+  reviewQueue.forEach((g) => {
+    const info = getBoxInfo(g.id);
+    html += `<div class="review-card" id="rc${g.id}">
       <span class="review-box-badge" style="background:${BOX_COLORS[info.box]}">Box ${info.box}</span>
       <div style="font-size:24px;font-weight:800;color:var(--purple);margin-bottom:6px;">${g.pattern}</div>
       <div style="font-size:13px;color:var(--muted);margin-bottom:16px;">${g.unit}</div>
-      <button class="btn sec" style="font-size:12px;" onclick="revealReviewAnswer()" id="revealBtn">Show meaning</button>
-      <div id="reviewAnswer" style="display:none;margin-top:14px;">
+      <button class="btn sec" style="font-size:12px;" onclick="revealReviewAnswer(${g.id})" id="revealBtn${g.id}">Show meaning</button>
+      <div id="reviewAnswer${g.id}" style="display:none;margin-top:14px;">
         <div class="modal-meaning" style="margin-bottom:10px;">${g.english}</div>
         <div class="example-block">
           <div class="jp">${applyFurigana(g.examples[0].jp)}</div>
@@ -770,16 +764,30 @@ function renderReviewCard() {
         </div>
       </div>
     </div>`;
+  });
+  document.getElementById('review').innerHTML = html;
 }
-window.revealReviewAnswer = function() {
-  document.getElementById('reviewAnswer').style.display = 'block';
-  document.getElementById('revealBtn').style.display = 'none';
+
+window.revealReviewAnswer = function(id) {
+  document.getElementById(`reviewAnswer${id}`).style.display = 'block';
+  document.getElementById(`revealBtn${id}`).style.display = 'none';
 };
+
 window.answerReview = async function(id, correct) {
   await gradeReview(id, correct);
-  reviewIdx++;
-  renderReviewCard();
+  // remove this card from the queue and the page, rather than re-rendering everything
+  reviewQueue = reviewQueue.filter(g => g.id !== id);
+  const cardEl = document.getElementById(`rc${id}`);
+  if (cardEl) cardEl.remove();
+  if (reviewQueue.length === 0) {
+    renderReviewList(); // shows the "all caught up" state with working Check Again button
+  } else {
+    // refresh box pill counts at top without losing remaining cards
+    const pillsContainer = document.querySelector('#review .box-pills');
+    if (pillsContainer) pillsContainer.outerHTML = boxPillsHtml();
+  }
 };
+
 
 
 function initFC() {
