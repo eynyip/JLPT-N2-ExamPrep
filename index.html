@@ -77,6 +77,20 @@
   .sync-status{font-size:11px;color:var(--teal);text-align:right;margin-bottom:8px;}
   .sync-status.error{color:var(--orange);}
 
+  /* ── REVIEW / SPACED REPETITION ── */
+  .review-empty{background:#fff;border-radius:14px;padding:40px 24px;text-align:center;border:2px solid var(--border);}
+  .box-pills{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:18px;}
+  .box-pill{background:#fff;border:2px solid var(--border);border-radius:20px;padding:7px 14px;font-size:12px;font-weight:600;color:var(--muted);}
+  .box-pill.b1{border-color:var(--orange);color:var(--orange);}
+  .box-pill.b2{border-color:#fdcb6e;color:#b8860b;}
+  .box-pill.b3{border-color:var(--purple-light);color:var(--purple);}
+  .box-pill.b4{border-color:#74b9ff;color:#0984e3;}
+  .box-pill.b5{border-color:var(--teal);color:var(--teal);}
+  .review-card{background:#fff;border:2px solid var(--border);border-radius:14px;padding:22px;margin-bottom:14px;}
+  .review-box-badge{display:inline-block;font-size:10px;font-weight:700;padding:3px 9px;border-radius:10px;margin-bottom:10px;color:#fff;}
+  .review-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;}
+  .review-actions button{padding:13px;border-radius:10px;font-size:13px;}
+
   /* ── OVERVIEW ── */
   .section-label{font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;
     color:var(--purple);margin:22px 0 10px;padding-left:4px;}
@@ -270,6 +284,7 @@
   <div class="nav-tabs">
     <button class="nav-btn active" data-tab="overview">📖 Overview</button>
     <button class="nav-btn" data-tab="progress">📊 Progress</button>
+    <button class="nav-btn" data-tab="review">🔁 Review</button>
     <button class="nav-btn" data-tab="flashcards">🃏 Cards</button>
     <button class="nav-btn" data-tab="quiz">📝 Quiz</button>
     <button class="nav-btn" data-tab="match">🎮 Match</button>
@@ -279,6 +294,7 @@
   <div class="content">
     <div id="overview"   class="tab-panel active"></div>
     <div id="progress"   class="tab-panel"></div>
+    <div id="review"     class="tab-panel"></div>
     <div id="flashcards" class="tab-panel"></div>
     <div id="quiz"       class="tab-panel"></div>
     <div id="match"      class="tab-panel"></div>
@@ -318,7 +334,7 @@ const db    = getFirestore(fbApp);
 // ══════════════════════════════════════════════
 //  PIN CONFIG  ← change your PIN here
 // ══════════════════════════════════════════════
-const CORRECT_PIN = '1201';
+const CORRECT_PIN = '1234';
 const USER_DOC    = 'user_default'; // single-user doc in Firestore
 
 // ══════════════════════════════════════════════
@@ -329,10 +345,10 @@ const userRef = () => doc(db, 'progress', USER_DOC);
 async function loadProgress() {
   try {
     const snap = await getDoc(userRef());
-    return snap.exists() ? snap.data() : { known:[], history:[], streak:0, lastDate:'', studied:[] };
+    return snap.exists() ? snap.data() : { known:[], history:[], streak:0, lastDate:'', studied:[], boxes:{} };
   } catch(e) {
     console.warn('Firestore load failed:', e);
-    return { known:[], history:[], streak:0, lastDate:'', studied:[] };
+    return { known:[], history:[], streak:0, lastDate:'', studied:[], boxes:{} };
   }
 }
 
@@ -367,6 +383,7 @@ let matchPairs=6, matchSelected=null, matchLocked=false, matchAttempts=0, matchM
 let quizItems=[], quizScore=0, quizAnswered=0;
 let fillItems=[];
 let speedItems=[], speedIdx=0, speedScore=0, speedStreak=0, speedBestStreak=0, speedTimer=null, speedTimeLeft=15;
+let reviewQueue=[], reviewIdx=0, reviewBoxes={}; // {id: {box:1-5, dueDate: 'ISO date'}}
 
 function filtered() { return activeUnit==='all' ? GRAMMAR : GRAMMAR.filter(g=>g.unit===activeUnit); }
 function shuffle(arr) { return [...arr].sort(()=>Math.random()-.5); }
@@ -442,6 +459,7 @@ async function initApp() {
   progressData = await loadProgress();
   knownSet   = new Set(progressData.known   || []);
   studiedSet = new Set(progressData.studied || []);
+  reviewBoxes = progressData.boxes || {};
   updateStreak();
   document.getElementById('loadingOverlay').style.display = 'none';
   document.getElementById('app').style.display = 'block';
@@ -471,6 +489,7 @@ function boot() {
       if(t==='match')      startMatch();
       if(t==='speed')      renderSpeedStart();
       if(t==='progress')   renderProgress();
+      if(t==='review')     renderReview();
     });
   });
   renderOverview();
@@ -522,6 +541,7 @@ function renderProgress() {
   const avgScore=history.length>0
     ? Math.round(history.slice(0,10).reduce((a,h)=>a+h.pct,0)/Math.min(history.length,10))+'%' : '—';
   const streak=progressData.streak||0;
+  const dueCount = getDueQueue().length;
 
   let html=`
   <div style="text-align:right;margin-bottom:4px;">
@@ -532,7 +552,7 @@ function renderProgress() {
     <div class="progress-grid">
       <div class="prog-stat"><div class="pval">${kCount}</div><div class="plbl">Patterns Known</div></div>
       <div class="prog-stat"><div class="pval">${total-kCount}</div><div class="plbl">Still Learning</div></div>
-      <div class="prog-stat"><div class="pval">${sCount}</div><div class="plbl">Cards Opened</div></div>
+      <div class="prog-stat"><div class="pval" style="color:${dueCount>0?'var(--orange)':'var(--purple)'}">${dueCount}</div><div class="plbl">Due for Review</div></div>
       <div class="prog-stat"><div class="pval">${avgScore}</div><div class="plbl">Avg Quiz Score</div></div>
     </div>
     <div class="prog-bar-wrap">
@@ -586,9 +606,9 @@ window.clearHistory = async function() {
   renderProgress();
 };
 window.confirmReset = async function() {
-  if(confirm('Reset ALL progress? This clears known patterns, history, and streak across all devices.')) {
-    progressData={ known:[], history:[], streak:0, lastDate:'', studied:[] };
-    knownSet=new Set(); studiedSet=new Set();
+  if(confirm('Reset ALL progress? This clears known patterns, history, streak, and review schedule across all devices.')) {
+    progressData={ known:[], history:[], streak:0, lastDate:'', studied:[], boxes:{} };
+    knownSet=new Set(); studiedSet=new Set(); reviewBoxes={};
     await saveProgress(progressData);
     renderProgress(); renderOverview();
   }
@@ -658,8 +678,110 @@ window.toggleKnown = async function(id) {
 };
 
 // ══════════════════════════════════════════════
-//  FLASHCARDS
+//  SPACED REPETITION (Leitner system, 5 boxes)
+//  Box 1: review same day   Box 2: +2 days   Box 3: +5 days
+//  Box 4: +10 days          Box 5: +21 days (mastered range)
 // ══════════════════════════════════════════════
+const BOX_INTERVALS = { 1:0, 2:2, 3:5, 4:10, 5:21 };
+const BOX_COLORS    = { 1:'var(--orange)', 2:'#fdcb6e', 3:'var(--purple-light)', 4:'#74b9ff', 5:'var(--teal)' };
+
+function getBoxInfo(id) {
+  return reviewBoxes[id] || { box:1, dueDate: new Date().toISOString().slice(0,10) };
+}
+function isDue(id) {
+  const info = getBoxInfo(id);
+  return info.dueDate <= new Date().toISOString().slice(0,10);
+}
+async function gradeReview(id, correct) {
+  const info = getBoxInfo(id);
+  let newBox = correct ? Math.min(info.box+1, 5) : 1;
+  const days = BOX_INTERVALS[newBox];
+  const due = new Date(); due.setDate(due.getDate()+days);
+  reviewBoxes[id] = { box:newBox, dueDate: due.toISOString().slice(0,10) };
+  progressData.boxes = reviewBoxes;
+  await saveProgress({ boxes: reviewBoxes });
+}
+function getDueQueue() {
+  // Any pattern the user has opened at least once is eligible for the review queue.
+  // Patterns never studied yet aren't included — Review is for reinforcement, not discovery.
+  return [...studiedSet].filter(id => isDue(id)).map(id => GRAMMAR.find(g=>g.id===id)).filter(Boolean);
+}
+
+function renderReview() {
+  reviewQueue = shuffle(getDueQueue());
+  reviewIdx = 0;
+  if (reviewQueue.length === 0) {
+    const totalStudied = studiedSet.size;
+    document.getElementById('review').innerHTML = `
+      <div class="review-empty">
+        <div style="font-size:40px;margin-bottom:12px;">✅</div>
+        <h3 style="margin-bottom:8px;">All caught up!</h3>
+        <p style="color:var(--muted);font-size:14px;line-height:1.6;">
+          ${totalStudied===0
+            ? 'Open some grammar cards in Overview first — Review pulls from patterns you\'ve already studied.'
+            : 'Nothing is due for review right now. Come back tomorrow, or open new cards in Overview to add them to your review schedule.'}
+        </p>
+      </div>`;
+    return;
+  }
+  renderReviewCard();
+}
+
+function renderReviewCard() {
+  if (reviewIdx >= reviewQueue.length) {
+    document.getElementById('review').innerHTML = `
+      <div class="review-empty">
+        <div style="font-size:40px;margin-bottom:12px;">🎉</div>
+        <h3 style="margin-bottom:8px;">Review session complete!</h3>
+        <p style="color:var(--muted);font-size:14px;">You cleared ${reviewQueue.length} due pattern${reviewQueue.length>1?'s':''}.</p>
+        <button class="btn" style="margin-top:18px;" onclick="renderReview()">Check Again</button>
+      </div>`;
+    return;
+  }
+  const g = reviewQueue[reviewIdx];
+  const info = getBoxInfo(g.id);
+  const dueCount = reviewQueue.length - reviewIdx;
+
+  // box distribution pills (overview of where things stand)
+  const boxCounts = {1:0,2:0,3:0,4:0,5:0};
+  [...studiedSet].forEach(id => { boxCounts[getBoxInfo(id).box]++; });
+
+  document.getElementById('review').innerHTML = `
+    <div class="box-pills">
+      ${[1,2,3,4,5].map(b=>`<span class="box-pill b${b}">Box ${b}: ${boxCounts[b]}</span>`).join('')}
+    </div>
+    <div style="text-align:center;color:var(--muted);font-size:13px;margin-bottom:14px;">
+      ${dueCount} due for review
+    </div>
+    <div class="review-card">
+      <span class="review-box-badge" style="background:${BOX_COLORS[info.box]}">Box ${info.box}</span>
+      <div style="font-size:24px;font-weight:800;color:var(--purple);margin-bottom:6px;">${g.pattern}</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:16px;">${g.unit}</div>
+      <button class="btn sec" style="font-size:12px;" onclick="revealReviewAnswer()" id="revealBtn">Show meaning</button>
+      <div id="reviewAnswer" style="display:none;margin-top:14px;">
+        <div class="modal-meaning" style="margin-bottom:10px;">${g.english}</div>
+        <div class="example-block">
+          <div class="jp">${applyFurigana(g.examples[0].jp)}</div>
+          <div class="en">${g.examples[0].en}</div>
+        </div>
+        <div class="review-actions">
+          <button class="btn red" onclick="answerReview(${g.id},false)">✗ Forgot — back to Box 1</button>
+          <button class="btn green" onclick="answerReview(${g.id},true)">✓ Knew it — move up</button>
+        </div>
+      </div>
+    </div>`;
+}
+window.revealReviewAnswer = function() {
+  document.getElementById('reviewAnswer').style.display = 'block';
+  document.getElementById('revealBtn').style.display = 'none';
+};
+window.answerReview = async function(id, correct) {
+  await gradeReview(id, correct);
+  reviewIdx++;
+  renderReviewCard();
+};
+
+
 function initFC() {
   fcList=shuffle(filtered()); fcIdx=0;
   renderFCShell(); renderFC();
@@ -748,23 +870,39 @@ window.quickQuiz = function(id) {
      opts:shuffle([g.english,...others.slice(0,3).map(x=>x.english)]),answer:g.english,explanation:g.note},
     {text:`Which grammar means "${g.english}"?`,
      opts:shuffle([g.pattern,...others.slice(0,3).map(x=>x.pattern)]),answer:g.pattern,explanation:`Structure: ${g.structure}`},
-    {text:`Which sentence uses "${g.pattern}" correctly?`,
-     opts:shuffle([g.examples[0].jp,...others.slice(0,3).map(x=>x.examples[0].jp)]),
-     answer:g.examples[0].jp,explanation:g.examples[0].en}
+    buildClozeQuestion(g, GRAMMAR)
   ];
   renderQuiz();
 };
+// Builds a cloze question: take ONE sentence, blank out g's grammar marker,
+// then offer g.pattern + 3 OTHER REAL GRAMMAR PATTERNS as the choices —
+// not unrelated sentences. This forces actual recognition, not pattern-matching by eye.
+function buildClozeQuestion(g, pool) {
+  const ex = g.examples[Math.floor(Math.random()*g.examples.length)];
+  const marker = g.pattern.replace('〜','');
+  const blanked = ex.jp.includes(marker) ? ex.jp.replace(marker,'＿＿＿＿') : ex.jp;
+  const distractors = shuffle(pool.filter(x=>x.id!==g.id)).slice(0,3);
+  return {
+    text: `Choose the grammar that correctly completes the sentence:`,
+    sentence: blanked,
+    translation: ex.en,
+    opts: shuffle([g.pattern, ...distractors.map(x=>x.pattern)]),
+    answer: g.pattern,
+    explanation: `${g.pattern} — ${g.english}. ${g.note}`
+  };
+}
 function buildQuiz(pool,n){
   return shuffle(pool).slice(0,n).map((g,i)=>{
     const o=shuffle(pool.filter(x=>x.id!==g.id));
-    const t=i%3;
+    const t=i%4;
     if(t===0) return {text:`What does "${g.pattern}" mean?`,
       opts:shuffle([g.english,...o.slice(0,3).map(x=>x.english)]),answer:g.english,explanation:g.note};
     if(t===1) return {text:`Which grammar means "${g.english}"?`,
       opts:shuffle([g.pattern,...o.slice(0,3).map(x=>x.pattern)]),answer:g.pattern,explanation:`Structure: ${g.structure}`};
-    return {text:`Which sentence uses "${g.pattern}" correctly?`,
-      opts:shuffle([g.examples[0].jp,...o.slice(0,3).map(x=>x.examples[0].jp)]),
-      answer:g.examples[0].jp,explanation:g.examples[0].en};
+    // Cloze-style appears for t===2 and t===3 (half the quiz) since the old
+    // "which sentence uses X correctly" type was guessable — only one option
+    // contained any grammar marker at all, so it didn't test recognition.
+    return buildClozeQuestion(g, pool);
   });
 }
 function renderQuiz(){
@@ -774,6 +912,8 @@ function renderQuiz(){
     html+=`<div class="q-block" id="q${i}">
       <div class="q-number">Question ${i+1} of ${quizItems.length}</div>
       <div class="q-text">${q.text}</div>
+      ${q.sentence?`<div style="font-size:17px;font-weight:600;margin:10px 0;line-height:1.8;">${q.sentence}</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:14px;font-style:italic;">${q.translation||''}</div>`:''}
       <div class="options" id="opts${i}">
         ${q.opts.map((o,j)=>`<div class="opt" onclick="checkQ(${i},${j})">${o}</div>`).join('')}
       </div><div id="fb${i}"></div></div>`;
