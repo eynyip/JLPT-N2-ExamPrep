@@ -535,4 +535,89 @@ const GRAMMAR = [
     note:'後ろには、何かが新しく始まったり、大きく変化したりする文が来る。Used for significant life or social events — not trivial daily triggers.',
     compareTo:'〜をきっかけに (same meaning, can be used for small everyday events); を契機に is more formal and reserved for major turning points'
   },
+  { id:49, unit:'Unit 4-1', pattern:'〜ことなく', english:'Without doing',
+    meaning:'Doing something without performing a certain action or under a certain condition. More formal and written than 〜ないで.',
+    structure:'[動詞辞書形] ＋ ことなく',
+    examples:[
+      { jp:'彼は一度も休むことなく、42キロを走りきった。', en:'He ran the entire 42 kilometers without resting even once.' },
+      { jp:'諦めることなく努力を続ければ、夢は叶います。', en:'If you continue to make an effort without giving up, your dream will come true.' }
+    ],
+    note:'The subject of both clauses must be the same. More formal/written than 〜ないで.',
+    compareTo:'〜ないで (same meaning but casual, used in daily conversation); ことなく is harder, written-language style'
+  },
+  { id:50, unit:'Unit 4-1', pattern:'〜あげく(に)', english:'After a long time of... / In the end (negative result)',
+    meaning:'After a long time of worrying or trying various things, a disappointing or negative result occurred.',
+    structure:'[動詞た形 / 名詞＋の] ＋ あげく(に)',
+    examples:[
+      { jp:'悩んだあげく、結局留学をあきらめることにした。', en:'After worrying a lot, I ended up giving up on studying abroad.' },
+      { jp:'何時間も話し合ったあげくに、結論が出なかった。', en:'After discussing for hours, we didn\'t reach any conclusion in the end.' }
+    ],
+    note:'⚠️ Basically only used for bad/negative results. Unlike 〜末に which can be used for both good and bad outcomes.',
+    compareTo:'〜末に (after a long process — can be positive or negative); あげく is almost always negative/disappointing'
+  },
+  { id:51, unit:'Unit 4-1', pattern:'〜つつも', english:'Even though / While knowing (inner conflict)',
+    meaning:'Doing something contrary to what one is thinking or feeling — knowing it\'s bad but doing it anyway. Expresses inner conflict or contradiction.',
+    structure:'[動詞ます形(ますを取る)] ＋ つつも',
+    examples:[
+      { jp:'体によくないと知りつつも、夜遅くにラーメンを食べてしまう。', en:'Even though I know it\'s bad for my health, I eat ramen late at night.' },
+      { jp:'早く起きようと思いつつも、いつも寝坊してしまう。', en:'Even though I intend to wake up early, I always end up oversleeping.' }
+    ],
+    note:'Often used with verbs expressing inner mental states (思う、知る、気がつく、言うなど). Expresses stronger regret or inner conflict than 〜ながら.',
+    compareTo:'〜ながらも (similar meaning but 〜つつも contains stronger nuance of regret and inner conflict)'
+  },
+  { id:52, unit:'Unit 4-1', pattern:'〜に限って', english:'Particularly / Especially in the case of (bad luck or strong belief)',
+    meaning:'Has two meanings: ① something bad happens specifically in this situation by bad luck; ② strong belief that this specific person/thing would absolutely never do such a thing.',
+    structure:'[名詞] ＋ に限って',
+    examples:[
+      { jp:'傘を持っていない日に限って、雨が降る。', en:'Particularly on days when I don\'t have an umbrella, it rains.' },
+      { jp:'うちの子に限って、そんな悪いことをするはずがありません。', en:'Especially in the case of my child, there is no way they would do such a bad thing.' }
+    ],
+    note:'Context determines which meaning applies — ① bad luck/Murphy\'s Law nuance, or ② strong trust/belief. Both carry emotional weight unlike plain 〜だけ.',
+    compareTo:'〜だけ (simple limitation, neutral); に限って adds emotion — either frustration (bad luck) or strong conviction (trust)'
+  },
+  { id:53, unit:'Unit 4-1', pattern:'〜として〜ない', english:'Not even one / Completely negates',
+    meaning:'Completely negates something by taking the smallest unit (e.g., single day, single person, one time), meaning "not even one..."',
+    structure:'[最小の数量詞(一人・一日・一度など)] ＋ として ＋ [動詞ない形]',
+    examples:[
+      { jp:'事故の知らせを聞いて、一日として心が休まる日はなかった。', en:'After hearing the news of the accident, there was not even a single day when my mind was at peace.' },
+      { jp:'その試験で合格できた者は、一人としていなかった。', en:'There was not even one person who managed to pass the exam.' }
+    ],
+    note:'The counter word always contains 1 (一人、一日、一回 etc.). More formal and emphatic than 〜一つも〜ない.',
+    compareTo:'〜一つも〜ない (same meaning, casual daily use); として〜ない is more formal and literary'
+  },
+  { id:54, unit:'Unit 4-1', pattern:'〜とはいうものの', english:'Although it is said that / Despite',
+    meaning:'While accepting the fact in the previous statement, the actual situation is somewhat different from what is expected. "Yes, that is true, but..."',
+    structure:'[普通形(名詞・な形容詞は「だ」が付くこともある)] ＋ とはいうものの',
+    examples:[
+      { jp:'4月になったとはいうものの、まだ風が冷たくて寒い。', en:'Although it is said that April has come, the wind is still chilly and cold.' },
+      { jp:'プロの選手とはいうものの、体調を崩すこともある。', en:'Despite being a professional player, there are times when they get sick.' }
+    ],
+    note:'More formal and written than 〜といっても. Often used to acknowledge a fact before pointing out a gap between expectation and reality.',
+    compareTo:'〜といっても (same meaning, more casual spoken); とはいうものの is harder, written-language register'
+  },
+  { id:55, unit:'Unit 4-1', pattern:'〜ない限り', english:'Unless / As long as ... not',
+    meaning:'If condition A is not met, then B will not occur. Expresses a strong restriction meaning "without this condition, it is absolutely impossible."',
+    structure:'[動詞ない形] ＋ 限り ／ [名詞・な形容詞＋でない] ＋ 限り',
+    examples:[
+      { jp:'本人が直接申し込まない限り、手続きはできません。', en:'Unless the person applies directly, the procedure cannot be completed.' },
+      { jp:'雨が降らない限り、明日の試合は予定通り行います。', en:'Unless it rains, tomorrow\'s match will be held as scheduled.' }
+    ],
+    note:'⚠️ The clause that follows is often negative or expresses something impossible/undesirable. Stronger than 〜なければ.',
+    compareTo:'〜なければ (simple condition); ない限り expresses a much stronger restriction — "absolutely impossible without this"'
+  },
+  { id:56, unit:'Unit 4-1', pattern:'〜に応えて', english:'In response to / In order to meet',
+    meaning:'Acting in accordance with the expectations, requests, and other needs of someone or something.',
+    structure:'[名詞] ＋ に応えて',
+    examples:[
+      { jp:'客のアンコールに応えて、歌手はもう一曲歌った。', en:'In response to the audience\'s encore, the singer performed one more song.' },
+      { jp:'国民の期待に応えて、新しい政策が発表された。', en:'In order to meet the citizens\' expectations, a new policy was announced.' }
+    ],
+    note:'Commonly used with nouns like 期待、要望、リクエスト、アンコール. Used for actions taken to satisfy someone else\'s expectations or requests.',
+    compareTo:'〜に従って (following rules/instructions); に応えて specifically means fulfilling someone\'s expressed expectation or request'
+  },
+  // ════════════════════════════════════════════
+  //  ADD NEW UNITS BELOW THIS LINE
+  //  Next id to use: 57
+  //  Next unit label: Unit 4-2
+  // ════════════════════════════════════════════
 ];
